@@ -50,12 +50,12 @@ def data_parse(json_import):
         df = df.append(the_dict, ignore_index=True)
     return(df)
 
-def import_all_data(query = ''):
+def import_all_data(query = '', category = ''):
     """
     Loops through data_import() and data_parse() to return data for all pages given a query/category
     (parallize it?)
     """
-    json_import = data_import(query = query, page_number = 1)
+    json_import = data_import(query = query, category = category, page_number = 1)
     df = data_parse(json_import)
     total_items = np.ceil(json_import['totalItems']/json_import['itemsPerPage'])
     for i in tqdm(range(1, int(total_items))):
